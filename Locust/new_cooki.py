@@ -28,11 +28,7 @@ class userbehaviour(SequentialTaskSet):
             "password": "LR74PggznZW4vWd",
             "__RequestVerificationToken": token
         }
-        params = [(b'Login', b'alikhan'), (b'Password', b'LR74PggznZW4vWd'),
-                  (b'__RequestVerificationToken', f'{token}')]
-
         with self.client.post("/Auth/Login", data=self.data, name="logging_in", allow_redirects=True, headers=hhhh,
-                              params=params,
                               catch_response=True) as resp1:
             if resp1.status_code == 200:
                 resp1.success()
@@ -45,8 +41,6 @@ class userbehaviour(SequentialTaskSet):
     @task
     def launching(self):
         with self.client.get("/Courses/View", name="main page", catch_response=True) as main_page:
-            # print(main_page.status_code)
-            # print(main_page.url)
             if ("alikhan") in main_page.text and main_page.status_code == 200:
                 main_page.success()
                 logger.info(f"username is correct and status code is {main_page.status_code}")
@@ -61,8 +55,6 @@ class userbehaviour(SequentialTaskSet):
                       "availableToMe": "false"}
         with self.client.get("/Courses/View", name="page 6", params=parameters,
                              headers={"header-name": "XMLHttpRequest"}, catch_response=True) as page6:
-            # print(page6.status_code)
-            # print(page6.url)
             soup = BeautifulSoup(page6.text, "html.parser")
             course_names = soup.find_all("a")
 
