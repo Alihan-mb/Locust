@@ -1,9 +1,5 @@
 import re
-import time
-
 from locust import HttpUser, SequentialTaskSet, task, between, FastHttpUser, constant
-from bs4 import BeautifulSoup
-import logging
 from locust.exception import StopUser
 
 hhhh = {
